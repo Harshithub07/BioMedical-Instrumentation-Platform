@@ -1,0 +1,254 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 210 40% 98%;
+  --foreground: 222 47% 11%;
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 47% 11%;
+  --primary: 173 80% 36%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222 47% 11%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215 16% 47%;
+  --accent: 173 80% 36%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 214 32% 91%;
+  --input: 214 32% 91%;
+  --ring: 173 80% 36%;
+  --radius: 1rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-white text-slate-900 antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+section {
+  scroll-margin-top: 5rem;
+}
+
+/* ── Backgrounds ──────────────────────────────────────────── */
+.bg-dot-pattern {
+  background-image: radial-gradient(circle, rgba(15, 118, 110, 0.06) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.bg-hero-gradient {
+  background: radial-gradient(ellipse 80% 50% at 50% -10%,
+      rgba(204, 251, 241, 0.55) 0%,
+      rgba(240, 253, 250, 0.25) 45%,
+      transparent 80%);
+}
+
+/* ── Card lift ────────────────────────────────────────────── */
+.hover-lift {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.25s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 24px 48px -12px rgba(15, 23, 42, 0.1),
+    0 0 0 1px rgba(13, 148, 136, 0.08);
+}
+
+/* ── Gradient border card ─────────────────────────────────── */
+.gradient-border {
+  position: relative;
+  background: white;
+  border-radius: 1.25rem;
+  overflow: hidden;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1.5px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(13, 148, 136, 0.3), rgba(16, 185, 129, 0.15), rgba(203, 213, 225, 0.2));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* ── Stat counter typography ──────────────────────────────── */
+.stat-number {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.04em;
+}
+
+/* ── Animated pulse ring ──────────────────────────────────── */
+@keyframes pulseRing {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.6;
+  }
+
+  70% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+.pulse-ring::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid rgba(13, 148, 136, 0.4);
+  animation: pulseRing 2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+/* ── Network node glow ────────────────────────────────────── */
+@keyframes nodeGlow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(13, 148, 136, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 12px 4px rgba(13, 148, 136, 0.15);
+  }
+}
+
+.node-glow {
+  animation: nodeGlow 3s ease-in-out infinite;
+}
+
+/* ── Data flow line ───────────────────────────────────────── */
+@keyframes dataFlow {
+  0% {
+    stroke-dashoffset: 100;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.data-flow-line {
+  stroke-dasharray: 6 4;
+  animation: dataFlow 2s linear infinite;
+}
+
+/* ── Float animation ──────────────────────────────────────── */
+@keyframes floatY {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-float {
+  animation: floatY 5s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: floatY 5s ease-in-out 1.5s infinite;
+}
+
+/* ── Fade in up on load ───────────────────────────────────── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.7s ease-out both;
+}
+
+.animate-fade-in-up-d1 {
+  animation: fadeInUp 0.7s 0.1s ease-out both;
+}
+
+.animate-fade-in-up-d2 {
+  animation: fadeInUp 0.7s 0.2s ease-out both;
+}
+
+.animate-fade-in-up-d3 {
+  animation: fadeInUp 0.7s 0.3s ease-out both;
+}
+
+.animate-fade-in-up-d4 {
+  animation: fadeInUp 0.7s 0.4s ease-out both;
+}
+
+/* ── Shimmer effect ───────────────────────────────────────── */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer-text {
+  background: linear-gradient(90deg,
+      #0f766e 0%,
+      #14b8a6 25%,
+      #10b981 50%,
+      #14b8a6 75%,
+      #0f766e 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+
+/* ── Scrollbar ────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0d9488;
+}
